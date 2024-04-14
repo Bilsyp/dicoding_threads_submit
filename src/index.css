@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Poppins", sans-serif;
+  }
+}
+@layer components {
+  .btn {
+    @apply text-sm bg-slate-800 text-white font-semibold rounded-md py-2 px-10;
+  }
+}
+.app {
+  position: relative;
+}
+.test {
+  clip-path: polygon(
+    0 19%,
+    84% 19%,
+    100% 0,
+    100% 100%,
+    37% 100%,
+    0 100%,
+    0 66%
+  );
+}
+
+/* Custom scrollbar */
+.scrollbar {
+  scrollbar-width: thin; /* Untuk browser non-WebKit */
+}
+
+/* Untuk browser yang mendukung WebKit (Chrome, Safari, dll.) */
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
