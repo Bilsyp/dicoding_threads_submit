@@ -1,5 +1,5 @@
 import { test } from "../../data";
-function HomePage() {
+function HomePage({ background }) {
   const config = {
     autoplay: true,
     loop: true,
@@ -33,6 +33,7 @@ function HomePage() {
             {test.map((item, index) => (
               <swiper-slide key={index}>
                 <div
+                  style={{ background: background }}
                   className="rounded-lg border bg-card text-card-foreground shadow-sm"
                   data-v0-t="card"
                 >

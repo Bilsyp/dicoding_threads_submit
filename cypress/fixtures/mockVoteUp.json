@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "message": "Thread upvoted",
+  "data": {
+    "vote": {
+      "id": "vote-1",
+      "userId": "users-1",
+      "threadId": "thread-1",
+      "voteType": 1
+    }
+  }
+}

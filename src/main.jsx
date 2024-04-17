@@ -20,11 +20,12 @@ import {
 import { AllThreads, CreateThread, DetailThread } from "./components/threads";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import { Provider } from "react-redux";
-import { store } from "./store/index.js";
 import Error from "./components/Error.jsx";
 register();
+import { setupStore } from "./store";
 
-const router = createBrowserRouter(
+const store = setupStore();
+export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" index={true} element={<HomePage />} />

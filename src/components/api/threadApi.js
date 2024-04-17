@@ -40,7 +40,7 @@ export const threadApi = createApi({
       transformResponse: (response) => {
         return response.data.threads;
       },
-      providesTags: ["Threads", "Votes", "IsLogin", "Comment"],
+      providesTags: ["Threads", "Votes", "Comment"],
     }),
     getAllUsers: builder.query({
       query: () => `users`,
@@ -73,6 +73,9 @@ export const threadApi = createApi({
           "Content-Type": "application/json",
         },
       }),
+      transformResponse: (response) => {
+        return response.data.thread;
+      },
       invalidatesTags: ["Threads"],
     }),
 
@@ -86,6 +89,9 @@ export const threadApi = createApi({
           "Content-Type": "application/json",
         },
       }),
+      transformResponse: (response) => {
+        return response.data.comment;
+      },
       invalidatesTags: ["Comment"],
     }),
     upVoteThread: builder.mutation({

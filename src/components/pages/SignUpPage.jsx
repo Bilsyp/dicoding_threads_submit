@@ -48,7 +48,7 @@ const SignUpPage = () => {
       });
     }
     if (isError) {
-      setError("email", { message: error.data.message });
+      setError("email", { message: error?.data?.message });
     }
   }, [isSuccess, isError]);
   if (isLoading) {
@@ -57,6 +57,7 @@ const SignUpPage = () => {
   return (
     <section className="SignUpPage px-5 lg:px-1 ">
       <form
+        data-test="form-test"
         onSubmit={handleSubmit(onSubmit)}
         className="mx-auto max-w-md space-y-6 py-6 px-2 rounded-md lg:p-5  lg:my-10 border bg-card text-card-foreground shadow-sm"
       >
@@ -76,6 +77,7 @@ const SignUpPage = () => {
                 Name
               </label>
               <input
+                data-test="name-test"
                 {...register("name", { required: true })}
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 id="first-name"
@@ -92,6 +94,7 @@ const SignUpPage = () => {
               Email
             </label>
             <input
+              data-test="email-test"
               type="email"
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="email"
@@ -112,6 +115,7 @@ const SignUpPage = () => {
               Password
             </label>
             <input
+              data-test="password-test"
               {...register("password", { required: true })}
               type="password"
               className={`${
@@ -138,6 +142,7 @@ const SignUpPage = () => {
             </label>
             <input
               type="password"
+              data-test="match-password-test"
               {...register("confirmPassword", { required: true })}
               className={`${
                 errors.password ? "border-red-600" : ""
@@ -172,6 +177,7 @@ const SignUpPage = () => {
             </label>
           </div>
           <button
+            data-test="register-button"
             className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-md font-semibold ring-offset-background transition-colors  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-slate-800 text-white text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
             type="submit"
           >

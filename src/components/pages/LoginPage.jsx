@@ -56,12 +56,16 @@ const LoginPage = () => {
   return (
     <section className="loginPage mt-10 lg:mt-10 lg:h-[90vh] px-3 flex justify-center items-center">
       <form
+        data-test="form-test"
         onSubmit={handleSubmit(onSubmit)}
         className="rounded-lg border h-fit  bg-card text-card-foreground shadow-sm mx-auto max-w-sm"
         data-v0-t="card"
       >
         <div className="flex flex-col p-6 space-y-1">
-          <h3 className="whitespace-nowrap tracking-tight text-2xl font-bold">
+          <h3
+            data-test={"test-h3"}
+            className="whitespace-nowrap tracking-tight text-2xl font-bold"
+          >
             Login
           </h3>
           <p className="text-sm text-muted-foreground">
@@ -80,6 +84,7 @@ const LoginPage = () => {
               <input
                 {...register("email", { required: true })}
                 type="email"
+                data-test="email-test"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 id="email"
                 placeholder="m@example.com"
@@ -108,6 +113,7 @@ const LoginPage = () => {
                 </a>
               </div>
               <input
+                data-test="password-test"
                 {...register("password", { required: true })}
                 type="password"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -119,7 +125,7 @@ const LoginPage = () => {
                 </p>
               )}
             </div>
-            <button className="btn" type="submit">
+            <button data-test="login-button" className="btn" type="submit">
               Login
             </button>
           </div>

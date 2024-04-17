@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "message": "User created",
+  "data": {
+    "user": {
+      "id": "user-123",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "avatar": "https://generated-image-url.jpg"
+    }
+  }
+}

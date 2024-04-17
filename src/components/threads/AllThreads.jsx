@@ -23,7 +23,7 @@ const AllThreads = () => {
     category == "" ? item : item.category == category
   );
   return (
-    <section className="all_threads px-1 lg:px-0">
+    <section data-testid={"allthreads"} className="all_threads px-1 lg:px-0">
       <CategoryThreads
         category={category}
         setCategory={setCategory}

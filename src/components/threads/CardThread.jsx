@@ -22,10 +22,15 @@ const CardThread = ({
     downVotesBy,
   };
   return (
-    <div className="card border rounded-md shadow-md relative overflow-clip     min-h-72 ">
+    <div
+      data-test="card"
+      className="card border rounded-md shadow-md relative overflow-clip     min-h-72 "
+    >
       <div className="flex flex-col rounded-lg overflow-hidden">
         <div className="flex-1 p-6 grid gap-4 ">
           <Link
+            data-test="title"
+            data-testid="title"
             to={`/detail/${id}`}
             className="font-semibold text-xl line-clamp-2 hover:underline"
             href="#"
@@ -35,7 +40,10 @@ const CardThread = ({
           <span className="text-sm block text-gray-600">#{category}</span>
           <p className="text-sm text-gray-400">{formatTimeAgo(createdAt)}</p>
 
-          <article className="text-sm pb-5  break-all break-words  text-gray-500 dark:text-gray-400 line-clamp-2">
+          <article
+            data-testid="body"
+            className="text-sm pb-5  break-all break-words  text-gray-500 dark:text-gray-400 line-clamp-2"
+          >
             {parse(body)}
           </article>
           <ThreadInteract

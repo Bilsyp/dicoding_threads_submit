@@ -129,15 +129,23 @@ const ThreadInteract = ({
   return (
     <div className={`interact my-3 flex justify-between ${className}`}>
       <div className="flex justify-start items-center gap-5">
-        <button className="flex gap-4 items-center" onClick={handleUpVote}>
+        <button
+          data-test={"voteUp"}
+          className="flex gap-4 items-center"
+          onClick={handleUpVote}
+        >
           {isUserVoteUp ? (
-            <FaThumbsUp size={25} />
+            <FaThumbsUp data-test={"ThumbsUp"} size={25} />
           ) : (
-            <FaRegThumbsUp size={25} />
+            <FaRegThumbsUp data-test={"RegThumbsUp"} size={25} />
           )}
           <span>{upVotesBy?.length}</span>
         </button>
-        <button className="flex gap-4 items-center" onClick={handleDownVote}>
+        <button
+          data-test={"voteDown"}
+          className="flex gap-4 items-center"
+          onClick={handleDownVote}
+        >
           {isUserVoteDown ? (
             <FaThumbsDown size={25} />
           ) : (
