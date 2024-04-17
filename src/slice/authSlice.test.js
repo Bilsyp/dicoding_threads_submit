@@ -14,7 +14,7 @@ describe("authReducer", () => {
   });
 
   it("harus menangani login", () => {
-    const token = "token-1234";
+    const token = "token-123";
     const action = login({ token });
     const expectedState = {
       ...initialState,
