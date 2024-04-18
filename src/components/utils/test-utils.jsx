@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { setupStore } from "../../store";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 export function renderWithProviders(
   ui,
   { route = "/" } = {},
@@ -22,6 +23,9 @@ export function renderWithProviders(
       </BrowserRouter>
     );
   }
+  Wrapper.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
   return {
     user: userEvent.setup(),
     store,

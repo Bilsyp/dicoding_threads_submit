@@ -54,7 +54,6 @@ const ThreadInteract = ({
         userId
       )
     : [];
-  const commentLength = comments ? comments.map((item) => item.upVotesBy) : [];
   const handleVote = (isUpVote, isUserVoted) => {
     const datax = { token: userToken, id };
     const test = {
@@ -99,7 +98,6 @@ const ThreadInteract = ({
   const handleUpVote = () => {
     const votes = types == "commentsVote" ? isUserVoteUpComments : isUserVoteUp;
     handleVote(true, votes);
-    console.log(commentLength);
   };
 
   const handleDownVote = () => {
@@ -131,6 +129,7 @@ const ThreadInteract = ({
       <div className="flex justify-start items-center gap-5">
         <button
           data-test={"voteUp"}
+          data-testid={"voteUp"}
           className="flex gap-4 items-center"
           onClick={handleUpVote}
         >
@@ -143,6 +142,7 @@ const ThreadInteract = ({
         </button>
         <button
           data-test={"voteDown"}
+          data-testid={"voteDown"}
           className="flex gap-4 items-center"
           onClick={handleDownVote}
         >

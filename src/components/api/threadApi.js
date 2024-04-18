@@ -12,6 +12,9 @@ export const threadApi = createApi({
         method: "POST",
         body: { name, email, password },
       }),
+      transformResponse: (response) => {
+        return response.data.user;
+      },
     }),
     authLogin: builder.mutation({
       query: ({ email, password }) => ({

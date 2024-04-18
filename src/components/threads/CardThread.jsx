@@ -24,6 +24,7 @@ const CardThread = ({
   return (
     <div
       data-test="card"
+      data-testid="card"
       className="card border rounded-md shadow-md relative overflow-clip     min-h-72 "
     >
       <div className="flex flex-col rounded-lg overflow-hidden">

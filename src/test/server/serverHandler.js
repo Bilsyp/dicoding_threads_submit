@@ -4,9 +4,11 @@ import {
   createCommentThreadResponse,
   createThreadResponse,
   detailMockApiResponse,
+  downVoteCommentResponse,
   loginResponse,
   profileResponse,
   registerResponse,
+  upVoteCommentResponse,
 } from "./mock";
 const ensureAuthHeader = (request) => {
   const token = request.headers.get("authorization");
@@ -43,6 +45,22 @@ const postHandlers = [
       HttpResponse.json(createCommentThreadResponse)
     );
   }),
+  http.post(
+    `${baseURL}/threads/:id/comments/:commentId/down-vote`,
+    ({ request }) => {
+      return (
+        ensureAuthHeader(request) || HttpResponse.json(downVoteCommentResponse)
+      );
+    }
+  ),
+  http.post(
+    `${baseURL}/threads/:id/comments/:commentId/up-vote`,
+    ({ request }) => {
+      return (
+        ensureAuthHeader(request) || HttpResponse.json(upVoteCommentResponse)
+      );
+    }
+  ),
 ];
 
 const handlers = [...getHandlers, ...postHandlers];
