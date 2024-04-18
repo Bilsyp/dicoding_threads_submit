@@ -13,7 +13,7 @@ import CardComment from "../comment/CardComment";
 // - Komponen "CardComment" diimpor, serta props "commentItem" dari "./mock".
 
 describe("Testing CardComment", () => {
-  it.only("should be visible", async () => {
+  it("should be visible", async () => {
     renderWithProviders(<CardComment comments={commentItem} id={"1"} />);
     const cardComment = screen.getByTestId("comment");
     const name = screen.getByTestId("name").textContent;
