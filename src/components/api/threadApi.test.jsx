@@ -1,8 +1,5 @@
-import { waitFor, screen, fireEvent } from "@testing-library/react";
-import {
-  renderWithProviders,
-  renderHookWithProviders,
-} from "../utils/test-utils";
+import { waitFor, act } from "@testing-library/react";
+import { renderHookWithProviders } from "../utils/test-utils";
 import { describe, it, expect } from "vitest";
 import {
   useAuthLoginMutation,
@@ -14,85 +11,94 @@ import {
   useGetProfileQuery,
 } from "./threadApi";
 
-describe("register", () => {
-  it("attempts to register a new user", async () => {
-    const TestComponent = () => {
-      const [registerMutation, { isSuccess }] = useAuthSignUpMutation();
-      return (
-        <div data-testid="test-container">
-          <button
-            data-testid="register-button"
-            onClick={() =>
-              registerMutation({
-                email: "newuser@gmail.com",
-                password: "123456",
-                name: "New User",
-              })
-            }
-          >
-            Register
-          </button>
-          <p data-testid="register-status">{String(isSuccess)}</p>
-        </div>
-      );
-    };
+/// Skenario
 
-    renderWithProviders(<TestComponent />);
+//  TODO : Menguji API useAuthSignUpMutation / hooks yang digunakan untuk melakukan proses fetching saat registrasi
+// - Entripoint routes: POST
 
-    const initialRegisterStatus =
-      screen.getByTestId("register-status").textContent;
+// should attempt to register a new user
 
-    expect(initialRegisterStatus).toBe("false");
-
-    const registerButton = screen.getByTestId("register-button");
-    fireEvent.click(registerButton);
-
-    await waitFor(() => {
-      const finalRegisterStatus =
-        screen.getByTestId("register-status").textContent;
-      expect(finalRegisterStatus).toBe("true");
+describe("register api testing", () => {
+  it(" should attempts to register a new user", async () => {
+    const { result } = renderHookWithProviders(() => useAuthSignUpMutation());
+    const register = result.current[0];
+    await act(async () => {
+      await register({
+        name: "John Doe'",
+        email: "john@example.com",
+        password: "2123",
+      });
     });
+    const data = result.current[1].data;
+    expect(data.name).toEqual("John Doe");
   });
 });
 
+// Skenario
+/* 
+  TODO: Menguji API dan hooks yang digunakan untuk melakukan proses fetching pada saat login.
+
+  Hooks: useAuthLoginMutation
+  - Entripoint routes: POST
+
+*/
+
+// should attempt to log in
 describe("login", () => {
-  it("attempts to log in", async () => {
-    const TestComponent = () => {
-      const [loginMutation, { isSuccess }] = useAuthLoginMutation();
-      return (
-        <div data-testid="test-container">
-          <button
-            data-testid="create"
-            onClick={() =>
-              loginMutation({
-                email: "cosmos@gmail.com",
-                password: "123456",
-              })
-            }
-          >
-            Login
-          </button>
-          <p data-testid="login-status">{String(isSuccess)}</p>
-        </div>
-      );
-    };
-
-    renderWithProviders(<TestComponent />);
-    const initialLoginStatus = screen.getByTestId("login-status").textContent;
-
-    expect(initialLoginStatus).toBe("false");
-
-    const loginButton = screen.getByTestId("create");
-    fireEvent.click(loginButton);
-
-    await waitFor(() => {
-      const finalLoginStatus = screen.getByTestId("login-status").textContent;
-      expect(finalLoginStatus).toBe("true");
+  it("should attempts to log in", async () => {
+    const { result } = renderHookWithProviders(() => useAuthLoginMutation());
+    const login = result.current[0];
+    await act(async () => {
+      await login({
+        name: "John Doe'",
+        email: "john@example.com",
+        password: "2123",
+      });
     });
+    const token = result.current[1].data;
+    expect(result.current[1].isSuccess).toBe(true);
+    expect(token).toEqual("1234");
   });
 });
 
-describe("threads api", () => {
+// Skenario
+/* 
+  TODO: Menguji API dan hooks yang digunakan untuk melakukan proses fetching data user setelah login berdasarkan token yang diterima.
+
+  - Entripoint routes: GET
+  - Hooks: useGetProfileQuery(token)
+*/
+
+describe("user profile", () => {
+  it("should return profile data", async () => {
+    const { result } = renderHookWithProviders(() =>
+      useGetProfileQuery("12324")
+    );
+    await waitFor(() => {
+      expect(result.current.isSuccess).toBe(true);
+    });
+    expect(result.current.data).toBeDefined();
+    const profile = result.current.data;
+    expect(profile.name).toEqual("John Doe");
+  });
+});
+
+// Skenario
+/* 
+  TODO: Menguji API dan hooks yang digunakan untuk melakukan proses fetching data threads, membuat data thread baru, dan membuat komentar pada thread.
+
+  - Entripoint routes: GET, POST
+  - Hooks: useGetAllThreadsQuery, useGetDetailThreadQuery, useCreateThreadMutation, useCreateThreadCommentMutation
+
+  useGetAllThreadsQuery: Mendapatkan semua data threads yang ada.
+  useGetDetailThreadQuery: Mendapatkan detail data thread berdasarkan ID thread.
+  useCreateThreadMutation({ user, token }): Membuat data thread baru.
+    - user: { title, content, category } Object
+  useCreateThreadCommentMutation(comment): Membuat komentar pada thread berdasarkan ID thread.
+    - comment: { token, threadId, content } Object
+*/
+
+describe("threads api query", () => {
   it("should return all threads", async () => {
     const { result } = renderHookWithProviders(() => useGetAllThreadsQuery());
     await waitFor(() => {
@@ -102,18 +108,6 @@ describe("threads api", () => {
     const threads = result.current.data;
     expect(threads).toHaveLength(1);
     expect(threads[0].title).toBe("Thread Pertama");
-  });
-
-  it("should return true for isSuccess when fetching all threads", async () => {
-    const Test = () => {
-      const { isSuccess } = useGetAllThreadsQuery();
-      return <div data-testid="test">{String(isSuccess)}</div>;
-    };
-    renderWithProviders(<Test />);
-    await waitFor(() => {
-      const textContent = screen.getByTestId("test").textContent;
-      expect(textContent).toBe("true");
-    });
   });
 
   it("should return details of a specific thread", async () => {
@@ -129,96 +123,38 @@ describe("threads api", () => {
     expect(thread.id).toBe("thread-1");
   });
 
-  it("should return profile data", async () => {
-    const { result } = renderHookWithProviders(() => useGetProfileQuery("12"));
-    await waitFor(() => {
-      expect(result.current.isSuccess).toBe(true);
-    });
-    expect(result.current.data).toBeDefined();
-    const profile = result.current.data;
-    expect(profile.name).toEqual("John Doe");
-  });
   it("should create new thread", async () => {
-    const TestComponent = () => {
-      const [createThread, { isSuccess, data }] = useCreateThreadMutation();
-
-      const handleCreateThread = () =>
-        createThread({
-          user: {
-            title: "Thread Pertama",
-            body: "Ini adalah thread pertama",
-            category: "",
-          },
-          token: "test",
-        });
-
-      return (
-        <div data-testid="test-container">
-          <button data-testid="create" onClick={handleCreateThread}>
-            create
-          </button>
-          <p data-testid="create-status">{String(isSuccess)}</p>
-          <h1 data-testid="title">{data?.title}</h1>
-        </div>
-      );
-    };
-
-    renderWithProviders(<TestComponent />);
-
-    const initialCreateStatus = screen.getByTestId("create-status").textContent;
-    expect(initialCreateStatus).toBe("false");
-
-    const createButton = screen.getByTestId("create");
-    fireEvent.click(createButton);
-
-    await waitFor(() => {
-      const title = screen.getByTestId("title").textContent;
-      const finalCreateStatus = screen.getByTestId("create-status").textContent;
-
-      expect(finalCreateStatus).toBe("true");
-      expect(title).toBe("Thread Pertama");
+    const { result } = renderHookWithProviders(() => useCreateThreadMutation());
+    const postThread = result.current[0];
+    await act(async () => {
+      await postThread({
+        user: {
+          title: "Thread Pertama",
+          body: "Ini adalah thread pertama",
+          category: "",
+        },
+        token: "12324",
+      });
     });
+
+    const thread = result.current[1].data;
+    expect(thread.title).toEqual("Thread Pertama");
+    expect(thread.body).toEqual("Ini adalah thread pertama");
   });
   it("should create new comment thread", async () => {
-    const TestComponent = () => {
-      const [CreateThreadComment, { isSuccess, data }] =
-        useCreateThreadCommentMutation();
-
-      const handleCreateThread = () => {
-        CreateThreadComment({
-          token: "12",
-          threadId: "1",
-          content: "Hello WOrld",
-        });
-      };
-
-      return (
-        <div data-testid="test-container">
-          <button data-testid="create" onClick={handleCreateThread}>
-            create
-          </button>
-          <p data-testid="create-status">{String(isSuccess)}</p>
-          <h1 data-testid="id">{data?.id}</h1>
-          <h1 data-testid="content">{data?.content}</h1>
-        </div>
-      );
-    };
-
-    renderWithProviders(<TestComponent />);
-
-    const initialCreateStatus = screen.getByTestId("create-status").textContent;
-    expect(initialCreateStatus).toBe("false");
-
-    const createButton = screen.getByTestId("create");
-    fireEvent.click(createButton);
-
-    await waitFor(() => {
-      const id = screen.getByTestId("id").textContent;
-      const content = screen.getByTestId("content").textContent;
-      const finalCreateStatus = screen.getByTestId("create-status").textContent;
-      expect(finalCreateStatus).toBe("true");
-      expect(id).toBe("comment-1");
-      expect(content).toBe("Ini adalah komentar pertama");
+    const { result } = renderHookWithProviders(() =>
+      useCreateThreadCommentMutation()
+    );
+    const postComment = result.current[0];
+    await act(async () => {
+      await postComment({
+        token: "1234",
+        threadId: "1",
+        content: "Ini adalah komentar pertama",
+      });
     });
+    const comment = result.current[1].data;
+    expect(comment.content).toEqual("Ini adalah komentar pertama");
+    expect(comment.id).toEqual("comment-1");
   });
 });

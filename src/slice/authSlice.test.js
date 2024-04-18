@@ -7,13 +7,16 @@ const initialState = {
   userId: null,
   userData: null,
 };
+// Skenario
 
+// TODO: Menguji reducer "authReducer" untuk memastikan penanganan state dan aksi yang sesuai.
+// - Initial state dari reducer didefinisikan sebagai object "initialState".
 describe("authReducer", () => {
-  it("harus menangani state awal", () => {
+  it("should handle initial state", () => {
     expect(authReducer(undefined, { type: "unknown" })).toEqual(initialState);
   });
 
-  it("harus menangani login", () => {
+  it("should handle login", () => {
     const token = "token-123";
     const action = login({ token });
     const expectedState = {
@@ -26,7 +29,7 @@ describe("authReducer", () => {
     expect(authReducer(initialState, action)).toEqual(expectedState);
   });
 
-  it("harus menangani logout", () => {
+  it("should handle logout", () => {
     const preLoginState = {
       isAuthenticated: true,
       userToken: "token-123",
@@ -38,7 +41,7 @@ describe("authReducer", () => {
     expect(authReducer(preLoginState, action)).toEqual(initialState);
   });
 
-  it("harus menangani setProfile", () => {
+  it("should handle setProfile", () => {
     const id = "123";
     const user = {
       name: "John Doe",

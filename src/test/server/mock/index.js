@@ -59,7 +59,7 @@ export const profileResponse = {
 };
 export const loginResponse = {
   data: {
-    token: "sdasd",
+    token: "1234",
   },
 };
 export const registerResponse = {
@@ -100,6 +100,26 @@ export const createCommentThreadResponse = {
         name: "John Doe",
         email: "john@example.com",
       },
+    },
+  },
+};
+export const upVoteCommentResponse = {
+  data: {
+    vote: {
+      id: "vote-1",
+      userId: "users-1",
+      commentId: "comment-1",
+      voteType: 1,
+    },
+  },
+};
+export const downVoteCommentResponse = {
+  data: {
+    vote: {
+      id: "vote-1",
+      userId: "users-1",
+      commentId: "comment-1",
+      voteType: -1,
     },
   },
 };
