@@ -1,9 +1,22 @@
 module.exports = {
+  // ...other config
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended",
+  ],
+  rules: {
+    semi: ["warn", "always"],
+  },
+  // ...other config
+};
+module.exports = {
   root: true,
   env: { browser: true, es2020: true, "cypress/globals": true },
   extends: [
-    "standard",
-
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
@@ -21,16 +34,7 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
-    // TODO : mematikan beberapa rules karena conlict dengan prettier
-    quotes: ["error", "double"],
-    semi: ["error", "always"],
-    "comma-dangle": "off",
-    quotes: "off",
-    "arrow-body-style": "off",
-    "prefer-arrow-callback ": "off",
-    indent: "off",
-    "space-before-function-paren": "off",
-    "trailing-whitespace": 0,
-    "multiline-ternary": "off",
+      quotes: ["error", "double"],
+      semi: ["error", "always"],
   },
 };

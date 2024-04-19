@@ -50,7 +50,7 @@ const SignUpPage = () => {
     if (isError) {
       setError("email", { message: error?.data?.message });
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, navigate, setError, error?.data?.message]);
   if (isLoading) {
     return <Loading />;
   }

@@ -48,7 +48,15 @@ const LoginPage = () => {
       }
       toast.error("connection timeout");
     }
-  }, [isSuccess, isError]);
+  }, [
+    isSuccess,
+    isError,
+    dispatch,
+    data,
+    navigate,
+    error?.data?.message,
+    setError,
+  ]);
   if (isLoading) {
     return <Loading />;
   }

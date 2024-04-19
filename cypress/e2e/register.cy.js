@@ -36,10 +36,10 @@ describe("Register spec", () => {
   });
 
   it.only("should display error message if registration fails", () => {
-    cy
-      .intercept("POST", "https://forum-api.dicoding.dev/v1/register")
-      .as("RegisterRequest"),
-      cy.getDataTest("name-test").type("John");
+    cy.intercept("POST", "https://forum-api.dicoding.dev/v1/register").as(
+      "RegisterRequest"
+    );
+    cy.getDataTest("name-test").type("John");
     cy.getDataTest("email-test").type("John@gmail.com");
     cy.getDataTest("password-test").type("123456");
     cy.getDataTest("match-password-test").type("123456");

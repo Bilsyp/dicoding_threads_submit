@@ -20,7 +20,7 @@ const AllThreads = () => {
     return <Error />;
   }
   const filterData = data.filter((item) =>
-    category == "" ? item : item.category == category
+    category === "" ? item : item.category === category
   );
   return (
     <section data-testid={"allthreads"} className="all_threads px-1 lg:px-0">

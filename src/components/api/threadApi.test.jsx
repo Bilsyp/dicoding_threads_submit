@@ -35,7 +35,7 @@ describe("register api testing", () => {
 });
 
 // Skenario
-/* 
+/*
   TODO: Menguji API dan hooks yang digunakan untuk melakukan proses fetching pada saat login.
 
   Hooks: useAuthLoginMutation
@@ -62,7 +62,7 @@ describe("login", () => {
 });
 
 // Skenario
-/* 
+/*
   TODO: Menguji API dan hooks yang digunakan untuk melakukan proses fetching data user setelah login berdasarkan token yang diterima.
 
   - Entripoint routes: GET
@@ -84,7 +84,7 @@ describe("user profile", () => {
 });
 
 // Skenario
-/* 
+/*
   TODO: Menguji API dan hooks yang digunakan untuk melakukan proses fetching data threads, membuat data thread baru, dan membuat komentar pada thread.
 
   - Entripoint routes: GET, POST

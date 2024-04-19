@@ -57,7 +57,7 @@ const ThreadInteract = ({
   const handleVote = (isUpVote, isUserVoted) => {
     const datax = { token: userToken, id };
     const test = {
-      commentId: commentsId ? commentsId : "",
+      commentId: commentsId || "",
       id,
       token: userToken,
     };
@@ -96,13 +96,14 @@ const ThreadInteract = ({
   };
 
   const handleUpVote = () => {
-    const votes = types == "commentsVote" ? isUserVoteUpComments : isUserVoteUp;
+    const votes =
+      types === "commentsVote" ? isUserVoteUpComments : isUserVoteUp;
     handleVote(true, votes);
   };
 
   const handleDownVote = () => {
     const votes =
-      types == "commentsVote" ? isUserVoteDownComments : isUserVoteDown;
+      types === "commentsVote" ? isUserVoteDownComments : isUserVoteDown;
     handleVote(false, votes);
   };
 
@@ -154,7 +155,7 @@ const ThreadInteract = ({
           <span>{downVotesBy?.length}</span>
         </button>
       </div>
-      <div className={`comment ${types == "commentsVote" ? "hidden" : ""}`}>
+      <div className={`comment ${types === "commentsVote" ? "hidden" : ""}`}>
         <button className="flex gap-4 items-center">
           <BiMessageRoundedDots size={25} />{" "}
           <span>{comments ? comments.length : totalComments}</span>

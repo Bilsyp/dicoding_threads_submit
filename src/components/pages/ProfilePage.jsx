@@ -14,7 +14,7 @@ const ProfilePage = () => {
     if (isSuccess) {
       dispatch(setProfile({ userId: data?.id, userData: data }));
     }
-  }, [isSuccess]);
+  }, [data, dispatch, isSuccess]);
 
   if (isLoading) {
     return <Loading />;
