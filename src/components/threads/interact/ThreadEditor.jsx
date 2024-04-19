@@ -36,7 +36,7 @@ const ThreadEditor = ({ value, setValue, type }) => {
         "image",
         "color",
       ]}
-      modules={type == "title" ? {} : modules}
+      modules={type === "title" ? {} : modules}
       value={value}
       onChange={setValue}
     />

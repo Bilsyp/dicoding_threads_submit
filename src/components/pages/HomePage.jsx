@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { test } from "../../data";
 function HomePage({ background }) {
   const config = {
@@ -33,7 +34,7 @@ function HomePage({ background }) {
             {test.map((item, index) => (
               <swiper-slide key={index}>
                 <div
-                  style={{ background: background }}
+                  style={{ background }}
                   className="rounded-lg border bg-card text-card-foreground shadow-sm"
                   data-v0-t="card"
                 >
@@ -93,5 +94,7 @@ function HomePage({ background }) {
     </div>
   );
 }
-
+HomePage.propTypes = {
+  background: PropTypes.string,
+};
 export default HomePage;

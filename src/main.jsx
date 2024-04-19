@@ -21,8 +21,9 @@ import { AllThreads, CreateThread, DetailThread } from "./components/threads";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import { Provider } from "react-redux";
 import Error from "./components/Error.jsx";
-register();
 import { setupStore } from "./store";
+
+register();
 
 const store = setupStore();
 export const router = createBrowserRouter(

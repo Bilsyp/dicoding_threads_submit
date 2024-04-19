@@ -18,7 +18,7 @@ const CategoryThreads = ({ data, setCategory, category }) => {
                 onClick={() => setCategory(item)}
                 key={idx}
                 className={`${
-                  item == category
+                  item === category
                     ? "bg-slate-800 text-white"
                     : "bg-gray-50 hover:bg-gray-100"
                 } rounded-lg px-3 py-1 border text-sm border-gray-200    transition-colors`}
