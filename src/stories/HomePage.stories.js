@@ -8,6 +8,6 @@ export default {
 };
 export const Data = {
   args: {
-    background: "red",
+    background: "grey",
   },
 };
